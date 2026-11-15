@@ -23,7 +23,7 @@ NOT pay any fee from another source without Fah's explicit approval.
 Yes, and pool creation is permissionless:
 
 1. Anyone calls `MetricOmmPoolFactory.createPool` — it is `external` with
-   NO access control (`MetricOmmPoolFactory.sol:204`, no `requiresAuth`).
+   NO access control (`MetricOmmPoolFactory.sol:205`, no `requiresAuth`).
 2. They pass the shipped `DepositAllowlistExtension` (a
    beforeAddLiquidity-only extension) ordered under
    `beforeRemoveLiquidity` (order word `1` in both slots).
@@ -189,7 +189,7 @@ lure deposits into a pool whose exits are bricked from birth.
   - `protocolPausePool` + `protocolUnpausePool` do not un-brick the pool
     (tested).
   - The factory's `collectTokens` / `collectEth`
-    (`MetricOmmPoolFactory.sol:337,348`) only move tokens held by the
+    (`MetricOmmPoolFactory.sol:337,347`) only move tokens held by the
     **factory itself** (`balanceOf(address(this))`) — they cannot touch
     pool funds.
   - `collectFees` only collects accrued fees, never principal.
@@ -223,7 +223,7 @@ rather than hiding it. Two points in favour of High despite that:
 ### The validation gap
 
 `MetricOmmPoolFactory.createPool`
-(`contracts/MetricOmmPoolFactory.sol:204`) is `external` with no access
+(`contracts/MetricOmmPoolFactory.sol:205`) is `external` with no access
 control. It calls
 `ValidateExtensionsConfig.validateExtensionsConfig(params.extensions,
 params.extensionOrders, params.extensionInitData)` (`:215-217`), then
@@ -272,7 +272,7 @@ that causes it is immutable.
 - `contracts/libraries/ValidateExtensionsConfig.sol` —
   `validateExtensionsConfig`, `_validateExtensionOrder` (counts / dupes /
   zero / indices only).
-- `contracts/MetricOmmPoolFactory.sol:204` — `createPool`, permissionless;
+- `contracts/MetricOmmPoolFactory.sol:205` — `createPool`, permissionless;
   `:215-217` validation call; `:269-273` `initialize` calls.
 - `contracts/ExtensionCalling.sol:21,33,42,51` — `EXTENSION_1..7` and
   `BEFORE_REMOVE_LIQUIDITY_ORDER` are immutables set in the constructor.
