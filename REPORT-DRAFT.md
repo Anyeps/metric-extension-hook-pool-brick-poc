@@ -11,6 +11,8 @@ NOT pay any fee from another source without Fah's explicit approval.
   **"Permanent freezing of funds"**.
 - **Payout wallet:** `0x45859319d9a362f2146d0431dc30ab8f0ef1be73`
 - **PoC repo:** https://github.com/Anyeps/metric-extension-hook-pool-brick-poc
+  — verified from a fresh clone at commit `3dafcac4`: `forge install`
+  (pinned deps) + `forge test` → **7 passed, 0 failed**.
 - **Code under test:** `pool-contracts` @ `ddf8ae0`, `periphery-contracts` @
   `5ceaec3` (exact repo code, local deploy, no fork — see below).
 
